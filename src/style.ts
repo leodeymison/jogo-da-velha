@@ -20,18 +20,19 @@ export const ContainerStyled = styled("div")`
 `;
 
 export const BoxedStyled = styled("span")<BoxType>`
-  width: 500px;
-  height: 500px;
-  border: solid 2px #eee;
+  width: 600px;
+  height: 600px;
+  border: solid 5px #eee;
   display: flex;
   flex-wrap: wrap;
 `;
 
 type BoxType = {
   color?: "x" | "circle";
+  positionLine?: "vertical" | "horizontal" | "diagonal";
 };
 
-export const BoxStyled = styled("span")<BoxType>`
+export const BoxStyled = styled("div")<BoxType>`
   color: ${(props) => props.color === "x" && "red"};
   color: ${(props) => props.color === "circle" && "blue"};
   font-size: 70px;
@@ -44,11 +45,30 @@ export const BoxStyled = styled("span")<BoxType>`
   border: solid 1px #272727;
   transition: 0.3s;
   position: relative;
+  &::after {
+    content: attr(data-descr);
+    position: absolute;
+    width: 150%;
+    background-color: #ffffcc;
+    padding: ${(props) => (props.positionLine === undefined ? "0px" : "10px")};
+    transform: ${(props) => {
+      if (props.positionLine === "diagonal") {
+        return "rotate(45deg)";
+      }
+      if (props.positionLine === "horizontal") {
+        return "rotate(0deg)";
+      }
+      if (props.positionLine === "vertical") {
+        return "rotate(90deg)";
+      }
+    }};
+  }
   &:hover {
     background-color: #272727;
     cursor: pointer;
     transition: 0.3s;
   }
+
   abbr {
     color: #313131;
     font-size: 14px;
@@ -65,6 +85,7 @@ export const MessageStyled = styled("span")`
   color: black;
   font-size: 18px;
   border-radius: 10px;
+  z-index: 1;
 `;
 
 export const ScoreboardStyled = styled("div")`
@@ -89,28 +110,31 @@ export const FormStyled = styled("form")`
   color: black;
   position: absolute;
   border-radius: 10px;
+  min-width: 20%;
   label {
     display: flex;
     flex-direction: column;
-    padding: 0.5em 0;
+    padding: 1em 0;
     span {
-      font-size: 12px;
+      font-size: 14px;
       color: #6f6f6f;
       padding: 0.2em 0;
     }
     button {
-      padding: 5px;
+      padding: 10px;
       background-color: #07b2ee;
       color: white;
       border: none;
       border-radius: 5px;
+      font-size: 18px;
       cursor: pointer;
       &:focus {
         outline: none;
       }
     }
     input {
-      padding: 5px;
+      font-size: 18px;
+      padding: 10px;
       border-radius: 5px;
       border: solid 1px #aaa;
       &:focus {
