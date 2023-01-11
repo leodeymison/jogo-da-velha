@@ -43,10 +43,18 @@ export const BoxStyled = styled("span")<BoxType>`
   align-items: center;
   border: solid 1px #272727;
   transition: 0.3s;
+  position: relative;
   &:hover {
     background-color: #272727;
     cursor: pointer;
     transition: 0.3s;
+  }
+  abbr {
+    color: #313131;
+    font-size: 14px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
   }
 `;
 

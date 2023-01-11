@@ -9,6 +9,7 @@ import {
   ScoreboardStyled,
 } from "./style";
 import { useForm } from "react-hook-form";
+import { GoArrowLeft } from "react-icons/go";
 
 const App = () => {
   const { register, handleSubmit } = useForm();
@@ -16,6 +17,7 @@ const App = () => {
 
   const [list, setList] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [timePlayer, setTimePlayer] = useState(1);
+  const [playerStart, setplayerStart] = useState(1);
   const [message, setMessage] = useState("");
   const [winnerCombo, setWinnerCombo] = useState(0);
 
@@ -51,7 +53,8 @@ const App = () => {
   const clearBoard = () => {
     setList(list.map((item) => 0));
     setMessage("");
-    setTimePlayer(1);
+    setTimePlayer(playerStart === 1 ? 2 : 1);
+    setplayerStart((current) => (current === 1 ? 2 : 1));
     setWinnerCombo(0);
   };
 
@@ -151,7 +154,8 @@ const App = () => {
           <ScoreboardStyled>
             {players.map((item, index) => (
               <p key={index}>
-                {item.name}: <span>{item.score} pontos</span>
+                {item.name}: <span>{item.score} pontos</span>{" "}
+                {index + 1 === timePlayer && <GoArrowLeft />}
               </p>
             ))}
           </ScoreboardStyled>
@@ -162,6 +166,7 @@ const App = () => {
                 onClick={() => ClickElement(index)}
                 color={item === 1 ? "x" : "circle"}
               >
+                <abbr>{index + 1}</abbr>
                 {item === 1 && "X"}
                 {item === 2 && "O"}
               </BoxStyled>
