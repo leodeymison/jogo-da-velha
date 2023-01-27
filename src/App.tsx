@@ -140,6 +140,10 @@ const App = () => {
 
       {!addNames ? (
         <FormStyled onSubmit={handleSubmit(editNamePlayer)}>
+          <p>
+            Jogue o jogo da velha <br />
+            grátis online com seus amigos
+          </p>
           <label>
             <span>Jogador 1</span>
             <input

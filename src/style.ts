@@ -19,7 +19,7 @@ export const ContainerStyled = styled("div")`
   height: 100vh;
 `;
 
-export const BoxedStyled = styled("span")<BoxType>`
+export const BoxedStyled = styled("div")<BoxType>`
   width: 600px;
   height: 600px;
   border: solid 5px #eee;
@@ -111,6 +111,9 @@ export const FormStyled = styled("form")`
   position: absolute;
   border-radius: 10px;
   min-width: 20%;
+  p {
+    text-align: center;
+  }
   label {
     display: flex;
     flex-direction: column;
